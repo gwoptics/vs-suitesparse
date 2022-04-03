@@ -27,6 +27,19 @@ steps:
     configuration: '$(buildConfiguration)'
     clean: true
 
+steps:
+- script: |
+    echo on
+    dir
+    dir src
+    cd src
+    dir x64
+    cd x64
+    dir Release
+    cd Release
+    dir
+  displayName: Dir'
+
 - task: CopyFiles@2
   inputs:
     sourceFolder: 'src'
