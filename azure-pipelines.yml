@@ -14,6 +14,7 @@ steps:
 - script: |
     echo on
     dir
+    cd src
     git clone https://github.com/DrTimothyAldenDavis/SuiteSparse.git SuiteSparse
     cd SuiteSparse
     git checkout $(suitesparse)
