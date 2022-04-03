@@ -41,11 +41,10 @@ steps:
 
 - task: CopyFiles@2
   inputs:
-    sourceFolder: 'src/$(buildPlatform)/$(buildConfiguration)'
-    contents: './?(*.dll|*.lib)'
+    contents: 'src/$(buildPlatform)/$(buildConfiguration)/**'
     targetFolder: '$(Build.ArtifactStagingDirectory)'
 
 - task: PublishBuildArtifacts@1
   inputs:
     pathToPublish: '$(Build.ArtifactStagingDirectory)'
-    artifactName: drop
+    artifactName: build
