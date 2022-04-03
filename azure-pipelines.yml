@@ -34,9 +34,7 @@ steps:
     wget $(blas)
     wget $(lapack)
     dir
-    dir x64
   displayName: 'Get libf2c/lapack/blas for linking'
-
 
 - task: VSBuild@1
   inputs:
