@@ -9,6 +9,7 @@ variables:
   buildPlatform: 'x64'
   buildConfiguration: 'Release'
   suitesparse: 'v5.11.0'
+  libf2c: 'https://github.com/albertony/libf2c/releases/download/v1.1/libf2c.zip'
 
 steps:
 - script: |
@@ -20,10 +21,14 @@ steps:
     git checkout $(suitesparse)
   displayName: 'Download Suitesparse git'
 
-# - script: |
-#     cd vs-suitesparse\src
-#     MSBuild.exe .\SuiteSparse.sln /p:PlatformToolset=v143 /p:Configuration=Release /p:Platform=x64
-#   displayName: 'Build'
+- script: |
+    choco install wget unzip
+    cd vs-suitesparse\libs
+    wget $(libf2c)
+    unzip libf2c.zip
+    dir
+    dir x64
+  displayName: 'Get libf2c'
 
 - task: VSBuild@1
   inputs:
