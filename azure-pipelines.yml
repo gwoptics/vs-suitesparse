@@ -4,16 +4,29 @@ trigger:
 pool:
   vmImage: windows-2022
 
+variables:
+  solution: 'src/SuiteSparse.sln'
+  buildPlatform: 'x64'
+  buildConfiguration: 'Release'
+  suitesparse: 'v5.11.0'
+
 steps:
 - script: |
     echo on
     dir
     git clone https://github.com/DrTimothyAldenDavis/SuiteSparse.git SuiteSparse
     cd SuiteSparse
-    git checkout v5.11.0
+    git checkout $(suitesparse)
   displayName: 'Download Suitesparse git'
 
-- script: |
-    cd vs-suitesparse\src
-    MSBuild.exe .\SuiteSparse.sln /p:PlatformToolset=v143 /p:Configuration=Release /p:Platform=x64
-  displayName: 'Build'
+# - script: |
+#     cd vs-suitesparse\src
+#     MSBuild.exe .\SuiteSparse.sln /p:PlatformToolset=v143 /p:Configuration=Release /p:Platform=x64
+#   displayName: 'Build'
+
+- task: VSBuild@1
+  inputs:
+    solution: '$(solution)'
+    platform: '$(buildPlatform)'
+    configuration: '$(buildConfiguration)'
+    clean: true
