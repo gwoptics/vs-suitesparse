@@ -27,4 +27,15 @@ steps:
     configuration: '$(buildConfiguration)'
     clean: true
 
-- script: dir
+- script: dir src/x64/Release
+
+- task: CopyFiles@2
+  inputs:
+    sourceFolder: 'src'
+    contents: '$(BuildConfiguration)/**/?(*.exe|*.dll|*.lib)'
+    targetFolder: '$(Build.ArtifactStagingDirectory)'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathToPublish: '$(Build.ArtifactStagingDirectory)'
+    artifactName: drop
