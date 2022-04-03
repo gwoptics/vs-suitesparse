@@ -30,6 +30,7 @@ steps:
 steps:
 - script: |
     echo on
+    echo %Build.SourcesDirectory%
     dir
     dir src
     cd src
@@ -42,8 +43,8 @@ steps:
 
 - task: CopyFiles@2
   inputs:
-    sourceFolder: 'src'
-    contents: '$(BuildConfiguration)/**/?(*.dll|*.lib)'
+    sourceFolder: '$(Build.SourcesDirectory)'
+    contents: 'src/$(BuildConfiguration)/Release/?(*.dll|*.lib)'
     targetFolder: '$(Build.ArtifactStagingDirectory)'
 
 - task: PublishBuildArtifacts@1
