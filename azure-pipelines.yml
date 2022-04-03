@@ -27,7 +27,6 @@ steps:
     configuration: '$(buildConfiguration)'
     clean: true
 
-steps:
 - script: |
     echo on
     echo %Build.SourcesDirectory%
