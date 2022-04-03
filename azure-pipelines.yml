@@ -9,11 +9,6 @@ variables:
   buildPlatform: 'x64'
   buildConfiguration: 'Release'
   suitesparse: 'v5.11.0'
-  # libf2c.lib from lapack-for-windows seems to be built with a VS that's too old
-  # easy to recompile if we need to though from this git repo
-  libf2c: 'https://github.com/albertony/libf2c/releases/download/v1.1/libf2c.zip'
-  blas: 'http://icl.cs.utk.edu/lapack-for-windows/libraries/CLAPACK/blas.lib'
-  lapack: 'http://icl.cs.utk.edu/lapack-for-windows/libraries/CLAPACK/lapack.lib'
 
 steps:
 - script: |
@@ -25,20 +20,11 @@ steps:
     git checkout $(suitesparse)
   displayName: 'Download Suitesparse git'
 
-- script: |
-    choco install wget unzip
-    cd libs
-    wget $(libf2c)
-    unzip libf2c.zip
-    cd x64 
-    wget $(blas)
-    wget $(lapack)
-    dir
-  displayName: 'Get libf2c/lapack/blas for linking'
-
 - task: VSBuild@1
   inputs:
     solution: '$(solution)'
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
     clean: true
+
+- script: dir

@@ -2,6 +2,10 @@
 
 This is a Visual Studio solution for [SuiteSparse](https://github.com/DrTimothyAldenDavis/SuiteSparse).
 
+This has been modified from the work done by wo80 (https://github.com/wo80) in their vs-suitesparse repo.
+This fork is just to build KLU for the FINESSE package. I have removed multiple of the more complicated
+packages to compile such as metis and CHOLMOD which rely on BLAS.
+
 ## Instructions
 
 The repository does not contain the SuiteSparse source code. It can be obtained from https://github.com/DrTimothyAldenDavis/SuiteSparse. The Visual Studio solution was created for SuiteSparse version [5.7.2](https://github.com/DrTimothyAldenDavis/SuiteSparse/archive/v5.7.2.zip), but should also work with newer versions. Download the latest version and extract it to the `src` folder (a subfolder `SuiteSparse` should be created automatically). To check if everything is in its right place, make sure that the file `src/SuiteSparse/README.txt` exists.
